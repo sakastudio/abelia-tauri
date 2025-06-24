@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Window } from './Window';
 import { Taskbar } from './Taskbar';
-import { MailWindow } from './MailWindow';
 import './Desktop.css';
 
 interface WindowData {
@@ -86,7 +85,7 @@ export const Desktop: React.FC = () => {
   const taskbarItems = windows.map(w => ({
     id: w.id,
     title: w.title,
-    icon: w.title === '電子メール' ? '✉️' : '🗔',
+    icon: '🗔',
   }));
 
   return (
@@ -99,29 +98,6 @@ export const Desktop: React.FC = () => {
         <div className="desktop-icon" onDoubleClick={handleStartClick}>
           <div className="icon">📄</div>
           <div className="icon-label">Documents</div>
-        </div>
-        <div className="desktop-icon" onDoubleClick={() => {
-          const mailWindow: WindowData = {
-            id: `mail-${Date.now()}`,
-            title: '電子メール',
-            content: <MailWindow />,
-            x: 50,
-            y: 50,
-            width: 800,
-            height: 600,
-          };
-          
-          setWindows([...windows, mailWindow]);
-          const newZIndex = zIndexCounter + 1;
-          setZIndexCounter(newZIndex);
-          setWindowZIndexes({
-            ...windowZIndexes,
-            [mailWindow.id]: newZIndex,
-          });
-          setActiveWindowId(mailWindow.id);
-        }}>
-          <div className="icon">✉️</div>
-          <div className="icon-label">電子メール</div>
         </div>
       </div>
 
