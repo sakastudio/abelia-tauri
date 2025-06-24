@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Window.css';
+import { WindowTitleBar } from './WindowTitleBar';
 
 interface WindowProps {
   id: string;
@@ -99,12 +100,11 @@ export const Window: React.FC<WindowProps> = ({
       }}
       onMouseDown={() => onFocus(id)}
     >
-      <div className="window-header" onMouseDown={handleMouseDown}>
-        <span className="window-title">{title}</span>
-        <button className="window-close" onClick={() => onClose(id)}>
-          ✕
-        </button>
-      </div>
+      <WindowTitleBar
+        title={title}
+        onClose={() => onClose(id)}
+        onMouseDown={handleMouseDown}
+      />
       <div className="window-content">{children}</div>
       <div className="window-resize" onMouseDown={handleResizeMouseDown} />
     </div>
