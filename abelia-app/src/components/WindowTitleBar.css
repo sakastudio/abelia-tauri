@@ -1,0 +1,38 @@
+.window-header {
+  color: white;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: move;
+  user-select: none;
+  font-size: 14px;
+  background-size: auto 30px;
+  background-position: top left;
+  background-repeat: repeat-x;
+  height: 30px;
+}
+
+.window-title {
+  font-weight: 500;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  padding-left: 8px;
+}
+
+.window-close {
+  background: #E81123;
+  border: none;
+  color: white;
+  width: 45px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.window-close:hover {
+  background: #F1707A;
+}
