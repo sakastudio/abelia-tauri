@@ -9,39 +9,6 @@
   min-height: 150px;
 }
 
-.window-header {
-  background: linear-gradient(to bottom, #0054E3, #0044C3);
-  color: white;
-  padding: 4px 6px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: move;
-  user-select: none;
-  font-size: 14px;
-}
-
-.window-title {
-  font-weight: 500;
-}
-
-.window-close {
-  background: #E81123;
-  border: none;
-  color: white;
-  width: 45px;
-  height: 29px;
-  cursor: pointer;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-
-.window-close:hover {
-  background: #F1707A;
-}
 
 .window-content {
   flex: 1;
