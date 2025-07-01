@@ -19,8 +19,12 @@
   padding-left: 8px;
 }
 
-.window-close {
-  background: #E81123;
+.window-controls {
+  display: flex;
+  height: 30px;
+}
+
+.window-control {
   border: none;
   color: white;
   width: 45px;
@@ -31,8 +35,22 @@
   align-items: center;
   justify-content: center;
   transition: background 0.2s;
+  background: transparent;
+}
+
+.window-control:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.window-close {
+  background: #E81123;
 }
 
 .window-close:hover {
   background: #F1707A;
+}
+
+.window-minimize,
+.window-maximize {
+  font-size: 20px;
 }

@@ -1,49 +1,19 @@
 import React, { useState } from 'react';
 import { Window } from './Window';
 import { Taskbar } from './Taskbar';
+import type { WindowState } from '../types/Application';
 import './Desktop.css';
+import applications from "../applications";
 
-interface WindowData {
-  id: string;
-  title: string;
-  content: React.ReactNode;
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-}
 
 export const Desktop: React.FC = () => {
-  const [windows, setWindows] = useState<WindowData[]>([
-    {
-      id: '1',
-      title: 'Welcome',
-      content: (
-        <div>
-          <h2>Welcome to Abelia OS!</h2>
-          <p>This is a simple PC-like interface built with React and TypeScript.</p>
-          <ul>
-            <li>Drag windows by their title bar</li>
-            <li>Resize windows from the bottom-right corner</li>
-            <li>Click on windows to bring them to front</li>
-            <li>Use the taskbar to switch between windows</li>
-          </ul>
-        </div>
-      ),
-      x: 100,
-      y: 50,
-    },
-  ]);
+  const [windows, setWindows] = useState<WindowState[]>([]);
   
-  const [activeWindowId, setActiveWindowId] = useState<string>('1');
+  const [activeWindowId, setActiveWindowId] = useState<string | null>(null);
   const [zIndexCounter, setZIndexCounter] = useState(100);
-  const [windowZIndexes, setWindowZIndexes] = useState<{ [key: string]: number }>({ '1': 100 });
 
   const handleCloseWindow = (id: string) => {
     setWindows(windows.filter(w => w.id !== id));
-    const newZIndexes = { ...windowZIndexes };
-    delete newZIndexes[id];
-    setWindowZIndexes(newZIndexes);
     
     if (activeWindowId === id && windows.length > 1) {
       const remainingWindows = windows.filter(w => w.id !== id);
@@ -56,72 +26,120 @@ export const Desktop: React.FC = () => {
       setActiveWindowId(id);
       const newZIndex = zIndexCounter + 1;
       setZIndexCounter(newZIndex);
-      setWindowZIndexes({
-        ...windowZIndexes,
-        [id]: newZIndex,
-      });
+      setWindows(windows.map(w => 
+        w.id === id ? { ...w, zIndex: newZIndex } : w
+      ));
     }
   };
 
   const handleStartClick = () => {
-    const newWindow: WindowData = {
-      id: Date.now().toString(),
-      title: 'New Window',
-      content: <div>This is a new window!</div>,
-      x: 150 + windows.length * 30,
-      y: 100 + windows.length * 30,
-    };
-    
-    setWindows([...windows, newWindow]);
-    const newZIndex = zIndexCounter + 1;
-    setZIndexCounter(newZIndex);
-    setWindowZIndexes({
-      ...windowZIndexes,
-      [newWindow.id]: newZIndex,
-    });
-    setActiveWindowId(newWindow.id);
+    // スタートメニューの実装は後で追加
   };
 
-  const taskbarItems = windows.map(w => ({
-    id: w.id,
-    title: w.title,
-    icon: '🗔',
-  }));
+  const handleMinimizeWindow = (id: string) => {
+    setWindows(windows.map(w => 
+      w.id === id ? { ...w, isMinimized: true } : w
+    ));
+  };
+
+  const handleMaximizeWindow = (id: string) => {
+    setWindows(windows.map(w => 
+      w.id === id ? { ...w, isMaximized: !w.isMaximized } : w
+    ));
+  };
+
+  const openApplication = (appId: string) => {
+    const app = applications.get(appId);
+    if (!app) return;
+
+    const windowId = `${appId}-${Date.now()}`;
+    const newZIndex = zIndexCounter + 1;
+    setZIndexCounter(newZIndex);
+
+    const newWindow: WindowState = {
+      id: windowId,
+      applicationId: appId,
+      title: app.name,
+      position: app.defaultPosition || { x: 100 + windows.length * 30, y: 50 + windows.length * 30 },
+      size: app.defaultSize || { width: 600, height: 400 },
+      isMinimized: false,
+      isMaximized: false,
+      zIndex: newZIndex,
+    };
+
+    setWindows([...windows, newWindow]);
+    setActiveWindowId(windowId);
+  };
+
+  const taskbarItems = windows.filter(w => !w.isMinimized).map(w => {
+    const app = applications.get(w.applicationId);
+    return {
+      id: w.id,
+      title: w.title,
+      icon: app?.icon || '🗔',
+    };
+  });
 
   return (
     <div className="desktop">
       <div className="desktop-icons">
-        <div className="desktop-icon" onDoubleClick={handleStartClick}>
-          <div className="icon">📁</div>
-          <div className="icon-label">My Computer</div>
-        </div>
-        <div className="desktop-icon" onDoubleClick={handleStartClick}>
-          <div className="icon">📄</div>
-          <div className="icon-label">Documents</div>
-        </div>
+        {applications.getAll().map(app => (
+          <div key={app.id} className="desktop-icon" onDoubleClick={() => openApplication(app.id)}>
+            <div className="icon">{app.icon}</div>
+            <div className="icon-label">{app.name}</div>
+          </div>
+        ))}
       </div>
 
-      {windows.map(window => (
-        <Window
-          key={window.id}
-          id={window.id}
-          title={window.title}
-          initialX={window.x}
-          initialY={window.y}
-          initialWidth={window.width}
-          initialHeight={window.height}
-          onClose={handleCloseWindow}
-          onFocus={handleFocusWindow}
-          zIndex={windowZIndexes[window.id] || 100}
-        >
-          {window.content}
-        </Window>
-      ))}
+      {windows.filter(w => !w.isMinimized).map(window => {
+        const app = applications.get(window.applicationId);
+        if (!app) return null;
+        
+        const AppComponent = app.component;
+        
+        return (
+          <Window
+            key={window.id}
+            id={window.id}
+            title={window.title}
+            initialX={window.position.x}
+            initialY={window.position.y}
+            initialWidth={window.size.width}
+            initialHeight={window.size.height}
+            onClose={handleCloseWindow}
+            onFocus={handleFocusWindow}
+            zIndex={window.zIndex}
+            isMaximized={window.isMaximized}
+            maximizable={app.maximizable}
+            minimizable={app.minimizable}
+            resizable={app.resizable}
+            minSize={app.minSize}
+            maxSize={app.maxSize}
+            onMinimize={() => handleMinimizeWindow(window.id)}
+            onMaximize={() => handleMaximizeWindow(window.id)}
+          >
+            <AppComponent
+              windowId={window.id}
+              onClose={() => handleCloseWindow(window.id)}
+              onMinimize={() => handleMinimizeWindow(window.id)}
+              onMaximize={() => handleMaximizeWindow(window.id)}
+            />
+          </Window>
+        );
+      })}
 
       <Taskbar
         items={taskbarItems}
-        activeItemId={activeWindowId}
-        onItemClick={handleFocusWindow}
+        activeItemId={activeWindowId || undefined}
+        onItemClick={(id) => {
+          const window = windows.find(w => w.id === id);
+          if (window?.isMinimized) {
+            setWindows(windows.map(w => 
+              w.id === id ? { ...w, isMinimized: false } : w
+            ));
+          }
+          handleFocusWindow(id);
+        }}
         onStartClick={handleStartClick}
       />
     </div>
