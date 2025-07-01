@@ -3,7 +3,7 @@ import { Window } from './Window';
 import { Taskbar } from './Taskbar';
 import type { WindowState } from '../types/Application';
 import './Desktop.css';
-import applications from "../applications/applications.ts";
+import applications from "../applications";
 
 
 export const Desktop: React.FC = () => {
