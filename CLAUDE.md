@@ -57,12 +57,17 @@ npm run preview
 - **Window** (`src/components/Window.tsx`): ドラッグ可能でリサイズ可能なウィンドウコンポーネント
 - **Taskbar** (`src/components/Taskbar.tsx`): 開いているウィンドウの管理とスタートボタン機能を提供
 
+### アプリケーションアーキテクチャ
+- **アプリケーション登録システム**: 各アプリケーションは`appRegistry`に登録される
+- **ApplicationProps**: すべてのアプリケーションが実装する共通インターフェース
+- **動的ロード**: アプリケーションはmain.tsxでインポートされ、自動的にデスクトップに表示
+
 ### 状態管理
 - React組み込みのuseStateフックを使用
 - Desktopコンポーネントで以下の状態を管理：
-  - `windows`: 開いているウィンドウのデータ配列
+  - `windows`: 開いているウィンドウの状態（WindowState型）の配列
   - `activeWindowId`: 現在アクティブなウィンドウのID
-  - `windowZIndexes`: ウィンドウの重なり順を管理するz-index値
+  - `zIndexCounter`: ウィンドウの重なり順を管理するカウンター
 
 ### ウィンドウシステム
 - ウィンドウはタイトルバーでドラッグ可能
@@ -82,6 +87,11 @@ npm run preview
 abelia-app/
 ├── src/
 │   ├── components/      # UIコンポーネント
+│   ├── applications/    # アプリケーションモジュール
+│   │   ├── Calculator/  # 電卓アプリ
+│   │   ├── Welcome/     # ウェルカムアプリ
+│   │   └── registry.ts  # アプリケーション登録システム
+│   ├── types/           # TypeScript型定義
 │   ├── assets/          # 静的アセット
 │   ├── App.tsx          # ルートコンポーネント
 │   └── main.tsx         # エントリーポイント
@@ -95,6 +105,9 @@ abelia-app/
 2. TypeScriptの型定義を適切に使用する（interfaceでpropsを定義）
 3. CSSファイルはコンポーネントごとに分離して管理
 4. ウィンドウの状態管理はDesktopコンポーネントで一元化されている
+5. **重要: コード変更後は必ず`npm run build`を実行してTypeScriptエラーがないことを確認する**
+   - ビルドエラーがある場合は、必ず修正してから次の作業に進む
+   - これにより本番環境でのエラーを事前に防ぐことができる
 
 ## 今後の拡張可能性
 

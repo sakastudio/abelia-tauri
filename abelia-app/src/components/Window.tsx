@@ -13,6 +13,14 @@ interface WindowProps {
   onClose: (id: string) => void;
   onFocus: (id: string) => void;
   zIndex: number;
+  isMaximized?: boolean;
+  maximizable?: boolean;
+  minimizable?: boolean;
+  resizable?: boolean;
+  minSize?: { width: number; height: number };
+  maxSize?: { width: number; height: number };
+  onMinimize?: () => void;
+  onMaximize?: () => void;
 }
 
 export const Window: React.FC<WindowProps> = ({
@@ -26,6 +34,14 @@ export const Window: React.FC<WindowProps> = ({
   onClose,
   onFocus,
   zIndex,
+  isMaximized = false,
+  maximizable = true,
+  minimizable = true,
+  resizable = true,
+  minSize = { width: 200, height: 150 },
+  maxSize,
+  onMinimize,
+  onMaximize,
 }) => {
   const [position, setPosition] = useState({ x: initialX, y: initialY });
   const [size, setSize] = useState({ width: initialWidth, height: initialHeight });
@@ -33,7 +49,19 @@ export const Window: React.FC<WindowProps> = ({
   const [isResizing, setIsResizing] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [resizeStart, setResizeStart] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const [savedState, setSavedState] = useState({ position: { x: initialX, y: initialY }, size: { width: initialWidth, height: initialHeight } });
   const windowRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isMaximized) {
+      setSavedState({ position, size });
+      setPosition({ x: 0, y: 0 });
+      setSize({ width: window.innerWidth, height: window.innerHeight - 40 });
+    } else if (savedState) {
+      setPosition(savedState.position);
+      setSize(savedState.size);
+    }
+  }, [isMaximized]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -42,10 +70,22 @@ export const Window: React.FC<WindowProps> = ({
           x: e.clientX - dragStart.x,
           y: e.clientY - dragStart.y,
         });
-      } else if (isResizing) {
+      } else if (isResizing && resizable) {
+        let newWidth = resizeStart.width + e.clientX - resizeStart.x;
+        let newHeight = resizeStart.height + e.clientY - resizeStart.y;
+        
+        if (minSize) {
+          newWidth = Math.max(minSize.width, newWidth);
+          newHeight = Math.max(minSize.height, newHeight);
+        }
+        if (maxSize) {
+          newWidth = Math.min(maxSize.width, newWidth);
+          newHeight = Math.min(maxSize.height, newHeight);
+        }
+        
         setSize({
-          width: Math.max(200, resizeStart.width + e.clientX - resizeStart.x),
-          height: Math.max(150, resizeStart.height + e.clientY - resizeStart.y),
+          width: newWidth,
+          height: newHeight,
         });
       }
     };
@@ -67,7 +107,7 @@ export const Window: React.FC<WindowProps> = ({
 
   const handleMouseDown = (e: React.MouseEvent) => {
     onFocus(id);
-    if (e.currentTarget === e.target || e.currentTarget.classList.contains('window-header')) {
+    if ((e.currentTarget === e.target || e.currentTarget.classList.contains('window-header')) && !isMaximized) {
       setIsDragging(true);
       setDragStart({
         x: e.clientX - position.x,
@@ -104,9 +144,12 @@ export const Window: React.FC<WindowProps> = ({
         title={title}
         onClose={() => onClose(id)}
         onMouseDown={handleMouseDown}
+        onMinimize={minimizable ? onMinimize : undefined}
+        onMaximize={maximizable ? onMaximize : undefined}
+        isMaximized={isMaximized}
       />
       <div className="window-content">{children}</div>
-      <div className="window-resize" onMouseDown={handleResizeMouseDown} />
+      {resizable && !isMaximized && <div className="window-resize" onMouseDown={handleResizeMouseDown} />}
     </div>
   );
 };

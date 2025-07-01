@@ -1,0 +1,35 @@
+.welcome {
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.welcome h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.welcome h3 {
+  color: #555;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.welcome p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.welcome ul,
+.welcome ol {
+  color: #666;
+  line-height: 1.8;
+  padding-left: 1.5rem;
+}
+
+.welcome code {
+  background-color: #f4f4f4;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+}
