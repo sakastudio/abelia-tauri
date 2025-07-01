@@ -1,0 +1,131 @@
+/* Common styles for Classic Windows UI components */
+
+/* Base input/select styles */
+.ui-input,
+.ui-select {
+  padding: 1px 2px;
+  border: 2px inset #c0c0c0;
+  background-color: #fff;
+  font-size: 11px;
+  height: 20px;
+  font-family: 'MS UI Gothic', 'MS Gothic', 'MS Sans Serif', sans-serif;
+  outline: none;
+}
+
+.ui-input:disabled,
+.ui-select:disabled {
+  background-color: #c0c0c0;
+  color: #808080;
+}
+
+/* Select specific styles */
+.ui-select {
+  appearance: none;
+  background-image: url('/assets/support-center/dropdown.png');
+  background-repeat: no-repeat;
+  background-position: right 1px center;
+  background-size: 16px 20px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+/* Radio button styles */
+.ui-radio {
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border: 2px inset #c0c0c0;
+  border-radius: 50%;
+  background-color: #fff;
+  margin: 0;
+  margin-right: 3px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.ui-radio:checked {
+  background-image: url('/assets/support-center/radio-checked.png');
+  background-size: 8px 8px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.ui-radio:disabled {
+  background-color: #c0c0c0;
+  cursor: default;
+}
+
+.ui-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ui-radio-label.disabled {
+  color: #808080;
+  cursor: default;
+}
+
+/* Button styles */
+.ui-button {
+  padding: 6px 16px;
+  border: 1px solid #000;
+  background: #c0c0c0;
+  cursor: pointer;
+  font-size: 11px;
+  box-shadow: inset -1px -1px #000000, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
+  font-family: 'MS UI Gothic', 'MS Gothic', 'MS Sans Serif', sans-serif;
+  outline: none;
+}
+
+.ui-button:hover:not(:disabled) {
+  background-color: #d0d0d0;
+}
+
+.ui-button:active:not(:disabled) {
+  box-shadow: inset 1px 1px #000000, inset -1px -1px #dfdfdf, inset 2px 2px #808080, inset -2px -2px #ffffff;
+}
+
+.ui-button:disabled {
+  color: #808080;
+  cursor: default;
+}
+
+/* Button variants */
+.ui-button.danger {
+  background: linear-gradient(to bottom, #ff8a80 0%, #e53935 100%);
+  color: white;
+  box-shadow: inset -1px -1px #800000, inset 1px 1px #ffcccc, inset -2px -2px #c62828, inset 2px 2px #ffebee;
+}
+
+.ui-button.danger:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #ff9999 0%, #f44336 100%);
+}
+
+/* Size variants */
+.ui-input.small,
+.ui-select.small {
+  width: 60px;
+}
+
+.ui-input.medium,
+.ui-select.medium {
+  width: 150px;
+}
+
+.ui-input.large,
+.ui-select.large {
+  width: 300px;
+}
+
+.ui-button.small {
+  padding: 4px 12px;
+  font-size: 10px;
+}
+
+.ui-button.large {
+  padding: 8px 25px;
+  font-size: 14px;
+}

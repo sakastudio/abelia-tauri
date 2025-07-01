@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Window } from './Window';
 import { Taskbar } from './Taskbar';
 import type { WindowState } from '../types/Application';
@@ -11,6 +11,16 @@ export const Desktop: React.FC = () => {
   
   const [activeWindowId, setActiveWindowId] = useState<string | null>(null);
   const [zIndexCounter, setZIndexCounter] = useState(100);
+
+  //TEST_TEMP_START
+  // テストの利便性のため、起動時にサポートセンターを自動的に開く
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      openApplication('support-center');
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+  //TEST_TEMP_END
 
   const handleCloseWindow = (id: string) => {
     setWindows(windows.filter(w => w.id !== id));
