@@ -1,0 +1,61 @@
+/* Classic Windows Button styles */
+.button {
+  font-family: 'MS UI Gothic', 'MS Gothic', 'MS Sans Serif', sans-serif !important;
+  font-size: 11px !important;
+  background: #c0c0c0 !important;
+  border: 1px solid #000 !important;
+  box-shadow: inset -1px -1px #000000, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff !important;
+  border-radius: 0 !important;
+  min-height: auto !important;
+  height: auto !important;
+  padding: 6px 16px !important;
+  font-weight: normal !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  color: #000 !important;
+  transition: none !important;
+}
+
+.button:hover:not(:disabled) {
+  background-color: #d0d0d0 !important;
+  transform: none !important;
+}
+
+.button:active:not(:disabled) {
+  box-shadow: inset 1px 1px #000000, inset -1px -1px #dfdfdf, inset 2px 2px #808080, inset -2px -2px #ffffff !important;
+  transform: none !important;
+}
+
+.button:disabled {
+  color: #808080 !important;
+  background: #c0c0c0 !important;
+  cursor: default !important;
+  opacity: 1 !important;
+}
+
+/* Danger variant */
+.danger {
+  background: linear-gradient(to bottom, #ff8a80 0%, #e53935 100%) !important;
+  color: white !important;
+  box-shadow: inset -1px -1px #800000, inset 1px 1px #ffcccc, inset -2px -2px #c62828, inset 2px 2px #ffebee !important;
+}
+
+.danger:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #ff9999 0%, #f44336 100%) !important;
+}
+
+/* Size variants */
+.small {
+  padding: 4px 12px !important;
+  font-size: 10px !important;
+}
+
+.large {
+  padding: 8px 25px !important;
+  font-size: 14px !important;
+}
+
+/* Full width */
+.fullWidth {
+  width: 100% !important;
+}

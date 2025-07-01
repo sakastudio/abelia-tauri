@@ -1,0 +1,82 @@
+/* Classic Windows Select styles */
+.wrapper {
+  position: relative;
+}
+
+.input {
+  font-family: 'MS UI Gothic', 'MS Gothic', 'MS Sans Serif', sans-serif !important;
+  font-size: 11px !important;
+  padding: 1px 20px 1px 2px !important;
+  border: 2px inset #c0c0c0 !important;
+  background-color: #fff !important;
+  background-image: url('/assets/support-center/dropdown.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: right 1px center !important;
+  background-size: 16px 20px !important;
+  border-radius: 0 !important;
+  min-height: 20px !important;
+  height: 20px !important;
+  color: #000 !important;
+  cursor: pointer !important;
+  transition: none !important;
+  appearance: none !important;
+}
+
+.input:focus {
+  outline: none !important;
+  border-color: #c0c0c0 !important;
+  box-shadow: none !important;
+}
+
+.input:disabled {
+  background-color: #c0c0c0 !important;
+  color: #808080 !important;
+  cursor: default !important;
+  opacity: 1 !important;
+}
+
+/* Dropdown menu styles */
+.dropdown {
+  border: 1px solid #000 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3) !important;
+  padding: 2px !important;
+}
+
+.option {
+  font-family: 'MS UI Gothic', 'MS Gothic', 'MS Sans Serif', sans-serif !important;
+  font-size: 11px !important;
+  padding: 2px 4px !important;
+  color: #000 !important;
+  cursor: pointer !important;
+  transition: none !important;
+}
+
+.option:hover {
+  background-color: #000080 !important;
+  color: #fff !important;
+}
+
+/* Hide Mantine's default dropdown icon */
+.rightSection {
+  display: none !important;
+}
+
+/* Size variants */
+.small {
+  width: 60px !important;
+}
+
+.medium {
+  width: 150px !important;
+}
+
+.large {
+  width: 300px !important;
+}
+
+/* Full width */
+.fullWidth {
+  width: 100% !important;
+}

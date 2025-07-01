@@ -1,33 +1,36 @@
 import React from 'react';
-import './ui-common.css';
+import { Button as MantineButton } from '@mantine/core';
+import type { ButtonProps as MantineButtonProps } from '@mantine/core';
+import styles from './Button.module.css';
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends Omit<MantineButtonProps, 'variant' | 'size'> {
   variant?: 'default' | 'danger';
   size?: 'small' | 'medium' | 'large';
   fullWidth?: boolean;
+  onClick?: () => void;
 }
 
 const Button: React.FC<ButtonProps> = ({ 
   variant = 'default',
   size = 'medium',
   fullWidth,
-  className = '',
-  style,
-  children,
+  className,
   ...props 
 }) => {
-  const variantClass = variant === 'danger' ? ' danger' : '';
-  const sizeClass = size !== 'medium' ? ` ${size}` : '';
-  const fullWidthStyle = fullWidth ? { width: '100%', ...style } : style;
+  const classNames = [
+    styles.button,
+    variant === 'danger' && styles.danger,
+    size === 'small' && styles.small,
+    size === 'large' && styles.large,
+    fullWidth && styles.fullWidth,
+    className
+  ].filter(Boolean).join(' ');
   
   return (
-    <button
-      className={`ui-button${variantClass}${sizeClass} ${className}`.trim()}
-      style={fullWidthStyle}
+    <MantineButton
+      className={classNames}
       {...props}
-    >
-      {children}
-    </button>
+    />
   );
 };
 

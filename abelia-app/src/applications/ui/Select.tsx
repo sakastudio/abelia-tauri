@@ -1,12 +1,14 @@
 import React from 'react';
-import './ui-common.css';
+import { Select as MantineSelect } from '@mantine/core';
+import type { SelectProps as MantineSelectProps } from '@mantine/core';
+import styles from './Select.module.css';
 
 export interface SelectOption {
   value: string;
   label: string;
 }
 
-export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
+export interface SelectProps extends Omit<MantineSelectProps, 'size' | 'data'> {
   size?: 'small' | 'medium' | 'large';
   fullWidth?: boolean;
   options?: SelectOption[];
@@ -15,31 +17,34 @@ export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectE
 const Select: React.FC<SelectProps> = ({ 
   size,
   fullWidth,
-  className = '',
-  style,
+  className,
+  classNames,
   options,
-  children,
   ...props 
 }) => {
-  const sizeClass = size ? ` ${size}` : '';
-  const fullWidthStyle = fullWidth ? { width: '100%', ...style } : style;
+  const wrapperClasses = [
+    styles.wrapper,
+    size === 'small' && styles.small,
+    size === 'medium' && styles.medium,
+    size === 'large' && styles.large,
+    fullWidth && styles.fullWidth,
+    className
+  ].filter(Boolean).join(' ');
+  
+  // Convert options to Mantine format
+  const data = options || [];
   
   return (
-    <select
-      className={`ui-select${sizeClass} ${className}`.trim()}
-      style={fullWidthStyle}
+    <MantineSelect
+      className={wrapperClasses}
+      classNames={{
+        input: styles.input,
+        dropdown: styles.dropdown,
+        option: styles.option
+      }}
+      data={data}
       {...props}
-    >
-      {options ? (
-        options.map(option => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))
-      ) : (
-        children
-      )}
-    </select>
+    />
   );
 };
 

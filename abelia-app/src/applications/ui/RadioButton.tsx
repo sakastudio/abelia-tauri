@@ -1,43 +1,39 @@
 import React from 'react';
-import './ui-common.css';
+import { Radio } from '@mantine/core';
+import type { RadioProps } from '@mantine/core';
+import styles from './Radio.module.css';
 
-export interface RadioButtonProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export interface RadioButtonProps extends Omit<RadioProps, 'icon'> {
   label?: string;
 }
 
 const RadioButton: React.FC<RadioButtonProps> = ({ 
   label,
   disabled,
-  className = '',
-  id,
+  className,
+  classNames,
   ...props 
 }) => {
-  // Generate a unique ID if not provided and label exists
-  const inputId = id || (label ? `radio-${Math.random().toString(36).substr(2, 9)}` : undefined);
+  const wrapperClasses = [
+    styles.wrapper,
+    disabled && styles.disabled,
+    className
+  ].filter(Boolean).join(' ');
   
-  const radioInput = (
-    <input
-      type="radio"
-      id={inputId}
-      className={`ui-radio ${className}`.trim()}
+  return (
+    <Radio
+      label={label}
       disabled={disabled}
+      className={wrapperClasses}
+      classNames={{
+        radio: styles.radio,
+        label: styles.label,
+        icon: styles.icon
+      }}
+      icon={() => null} // Hide default icon
       {...props}
     />
   );
-
-  if (label) {
-    return (
-      <label 
-        htmlFor={inputId}
-        className={`ui-radio-label ${disabled ? 'disabled' : ''}`.trim()}
-      >
-        {radioInput}
-        {label}
-      </label>
-    );
-  }
-
-  return radioInput;
 };
 
 export default RadioButton;
