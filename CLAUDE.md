@@ -58,9 +58,11 @@ npm run preview
 - **Taskbar** (`src/components/Taskbar.tsx`): 開いているウィンドウの管理とスタートボタン機能を提供
 
 ### アプリケーションアーキテクチャ
-- **アプリケーション登録システム**: 各アプリケーションは`appRegistry`に登録される
+- **アプリケーション登録システム**: 各アプリケーションは`src/applications/index.ts`で一元管理
+  - `get(id: string)`: 指定したIDのアプリケーションを取得
+  - `getAll()`: すべてのアプリケーションを配列で取得
 - **ApplicationProps**: すべてのアプリケーションが実装する共通インターフェース
-- **動的ロード**: アプリケーションはmain.tsxでインポートされ、自動的にデスクトップに表示
+- **集中管理**: すべてのアプリケーションの登録情報は`applications/index.ts`に統合
 
 ### 状態管理
 - React組み込みのuseStateフックを使用
@@ -88,9 +90,8 @@ abelia-app/
 ├── src/
 │   ├── components/      # UIコンポーネント
 │   ├── applications/    # アプリケーションモジュール
-│   │   ├── Calculator/  # 電卓アプリ
-│   │   ├── Welcome/     # ウェルカムアプリ
-│   │   └── registry.ts  # アプリケーション登録システム
+│   │   ├── **/          # 各種アプリケーションディレクトリ
+│   │   └── index.ts     # アプリケーション登録システム（get/getAll機能付き）
 │   ├── types/           # TypeScript型定義
 │   ├── assets/          # 静的アセット
 │   ├── App.tsx          # ルートコンポーネント
@@ -105,13 +106,8 @@ abelia-app/
 2. TypeScriptの型定義を適切に使用する（interfaceでpropsを定義）
 3. CSSファイルはコンポーネントごとに分離して管理
 4. ウィンドウの状態管理はDesktopコンポーネントで一元化されている
-5. **重要: コード変更後は必ず`npm run build`を実行してTypeScriptエラーがないことを確認する**
+5. 新しいアプリケーションを追加する場合は`src/applications/index.ts`に登録する
+6. アプリケーションの取得は`applications.get(id)`または`applications.getAll()`を使用する
+7. **重要: コード変更後は必ず`npm run build`を実行してTypeScriptエラーがないことを確認する**
    - ビルドエラーがある場合は、必ず修正してから次の作業に進む
    - これにより本番環境でのエラーを事前に防ぐことができる
-
-## 今後の拡張可能性
-
-- Tauri統合によるネイティブデスクトップアプリケーション化
-- より複雑なウィンドウコンテンツ（ファイルエクスプローラー、テキストエディタなど）
-- 状態管理ライブラリの導入（Redux、Zustandなど）
-- テストフレームワークの追加
