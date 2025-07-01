@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Window } from './Window';
 import { Taskbar } from './Taskbar';
-import { appRegistry } from '../applications/registry';
 import type { WindowState } from '../types/Application';
 import './Desktop.css';
+import applications from "../applications/applications.ts";
 
 
 export const Desktop: React.FC = () => {
@@ -49,7 +49,7 @@ export const Desktop: React.FC = () => {
   };
 
   const openApplication = (appId: string) => {
-    const app = appRegistry.get(appId);
+    const app = applications.get(appId);
     if (!app) return;
 
     const windowId = `${appId}-${Date.now()}`;
@@ -72,7 +72,7 @@ export const Desktop: React.FC = () => {
   };
 
   const taskbarItems = windows.filter(w => !w.isMinimized).map(w => {
-    const app = appRegistry.get(w.applicationId);
+    const app = applications.get(w.applicationId);
     return {
       id: w.id,
       title: w.title,
@@ -83,7 +83,7 @@ export const Desktop: React.FC = () => {
   return (
     <div className="desktop">
       <div className="desktop-icons">
-        {appRegistry.getAll().map(app => (
+        {applications.getAll().map(app => (
           <div key={app.id} className="desktop-icon" onDoubleClick={() => openApplication(app.id)}>
             <div className="icon">{app.icon}</div>
             <div className="icon-label">{app.name}</div>
@@ -92,7 +92,7 @@ export const Desktop: React.FC = () => {
       </div>
 
       {windows.filter(w => !w.isMinimized).map(window => {
-        const app = appRegistry.get(window.applicationId);
+        const app = applications.get(window.applicationId);
         if (!app) return null;
         
         const AppComponent = app.component;
