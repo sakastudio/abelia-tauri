@@ -7,12 +7,11 @@ const SupportCenter : React.FC = () => {
 
     return (
         <>
-
             <img src="assets/support-center/電話.png"
                  style={{position: 'absolute', width: '100%', opacity: '0.5'}}></img>
 
             <Flex direction="row" style={{height: '100%', width: '100%'}}>
-
+                {/* 左側 顧客一覧 */}
                 <Flex flex={1} style={{backgroundColor: '#f5ed7f'}} direction="column">
                     <Flex flex={0.16} style={{backgroundColor: 'black'}}>
                       {/* 笑み道夫 */}
@@ -30,6 +29,8 @@ const SupportCenter : React.FC = () => {
                     </Flex>
                 </Flex>
 
+                {/* 右側 顧客詳細 */}
+
                 <Flex flex={2.1} style={{backgroundColor: '#7ff5f3'}} direction="column">
 
 
@@ -41,8 +42,6 @@ const SupportCenter : React.FC = () => {
 
 
                   </Flex>
-
-
                 </Flex>
             </Flex>
         </>
