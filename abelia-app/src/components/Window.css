@@ -12,9 +12,11 @@
 
 .window-content {
   flex: 1;
-  padding: 10px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-bottom: 2px;
   overflow: auto;
-  background: #F0F0F0;
+  background: #053797;
 }
 
 .window-resize {
