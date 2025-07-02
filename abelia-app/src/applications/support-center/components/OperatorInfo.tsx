@@ -10,7 +10,6 @@ const OperatorInfo: React.FC<OperatorInfoProps> = ({ operator }) => {
     <div className="operator-info">
       <div className="operator-avatar">
         <img src="/assets/support-center/operator-placeholder.png" alt={operator.name} />
-        <span className="operator-id">{operator.id}</span>
       </div>
       <div className="operator-details">
         <h3>{operator.name}</h3>
