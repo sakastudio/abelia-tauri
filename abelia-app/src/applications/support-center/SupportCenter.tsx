@@ -1,9 +1,10 @@
 import React from 'react';
-import {Button, Flex, Image, ScrollArea, Stack, Table, Text} from '@mantine/core';
+import {Flex, Image, ScrollArea, Stack, Table, Text} from '@mantine/core';
 import '@mantine/core/styles.css';
 import './SupportCenter.css';
 import './SupportCenterCustomerList.css';
 import '../fonts.css';
+import {CommonButton} from "../components/CommonButton.tsx";
 
 const SupportCenter : React.FC = () => {
 
@@ -26,7 +27,7 @@ const SupportCenter : React.FC = () => {
                     </Flex>
                     <Flex pt={25} pl={10}>
                       {/* 連絡先 留守番電話 */}
-                        <Button h={30} w={100}>連絡先</Button>
+                        <CommonButton h={30} w={100}>連絡先</CommonButton>
                     </Flex>
 
                     <Flex pt={12} pl={10}>
