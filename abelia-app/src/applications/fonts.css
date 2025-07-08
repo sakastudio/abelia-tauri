@@ -1,0 +1,97 @@
+@font-face {
+  font-family: 'JF-Dot-Shinonome12';
+  src: url('/assets/fonts/JF-Dot-Shinonome12.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JF-Dot-Shinonome12';
+  src: url('/assets/fonts/JF-Dot-Shinonome12B.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JF-Dot-Shinonome14';
+  src: url('/assets/fonts/JF-Dot-Shinonome14.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JF-Dot-Shinonome14';
+  src: url('/assets/fonts/JF-Dot-Shinonome14B.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JF-Dot-Shinonome16';
+  src: url('/assets/fonts/JF-Dot-Shinonome16.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JF-Dot-Shinonome16';
+  src: url('/assets/fonts/JF-Dot-Shinonome16B.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JF-Dot-ShinonomeMaru12';
+  src: url('/assets/fonts/JF-Dot-ShinonomeMaru12.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JF-Dot-ShinonomeMaru12';
+  src: url('/assets/fonts/JF-Dot-ShinonomeMaru12B.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JF-Dot-ShinonomeMin12';
+  src: url('/assets/fonts/JF-Dot-ShinonomeMin12.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JF-Dot-ShinonomeMin12';
+  src: url('/assets/fonts/JF-Dot-ShinonomeMin12B.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JF-Dot-ShinonomeMin14';
+  src: url('/assets/fonts/JF-Dot-ShinonomeMin14.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JF-Dot-ShinonomeMin14';
+  src: url('/assets/fonts/JF-Dot-ShinonomeMin14B.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JF-Dot-ShinonomeMin16';
+  src: url('/assets/fonts/JF-Dot-ShinonomeMin16.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JF-Dot-ShinonomeMin16';
+  src: url('/assets/fonts/JF-Dot-ShinonomeMin16B.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
