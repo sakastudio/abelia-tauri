@@ -1,17 +1,13 @@
 import classes from './CommonButton.module.css';
-import {Button, type ButtonProps} from "@mantine/core";
-import {forwardRef} from "react";
+import {Button, type ButtonProps, createPolymorphicComponent} from "@mantine/core";
+import type {Ref} from "react";
 
-type CommonButtonProps = ButtonProps;
+interface CommonButtonProp extends ButtonProps {
+    ref?: Ref<HTMLButtonElement>;
+}
 
-export const CommonButton= forwardRef<HTMLButtonElement, CommonButtonProps>(
-    ({ children, ...others}, ref) => (
-        <Button
-            ref={ref}
-            {...others}
-            className={classes.root}
-        >
-            {children}
-        </Button>
-    )
+export const CommonButton = createPolymorphicComponent<"button", CommonButtonProp>(
+    ({ref, ...props}: CommonButtonProp)=>{
+        return <Button ref={ref} {...props} className={classes.root} />
+        },
 );
