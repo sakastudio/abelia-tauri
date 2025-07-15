@@ -75,7 +75,7 @@ const SupportCenter : React.FC = () => {
 
 
                   <Flex flex={2.1} >
-                      <Text ff='JF-Dot-Shinonome16' fw='bold' c='black'>顧客名：佐藤 楓</Text>
+                      <Text ff='JF-Dot-Shinonome16' fw='bold' c='black' size='50px'>顧客名：佐藤 楓</Text>
 
 
                   </Flex>
