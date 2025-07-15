@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Window } from './Window';
 import { Taskbar } from './Taskbar';
 import type { WindowState } from '../types/Application';
@@ -8,23 +8,13 @@ import applications from "../applications";
 
 export const Desktop: React.FC = () => {
   const [windows, setWindows] = useState<WindowState[]>([]);
-  
+
   const [activeWindowId, setActiveWindowId] = useState<string | null>(null);
   const [zIndexCounter, setZIndexCounter] = useState(100);
 
-  //TEST_TEMP_START
-  // テストの利便性のため、起動時にサポートセンターを自動的に開く
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      openApplication('support-center');
-    }, 500);
-    return () => clearTimeout(timer);
-  }, []);
-  //TEST_TEMP_END
-
   const handleCloseWindow = (id: string) => {
     setWindows(windows.filter(w => w.id !== id));
-    
+
     if (activeWindowId === id && windows.length > 1) {
       const remainingWindows = windows.filter(w => w.id !== id);
       setActiveWindowId(remainingWindows[remainingWindows.length - 1].id);
@@ -36,7 +26,7 @@ export const Desktop: React.FC = () => {
       setActiveWindowId(id);
       const newZIndex = zIndexCounter + 1;
       setZIndexCounter(newZIndex);
-      setWindows(windows.map(w => 
+      setWindows(windows.map(w =>
         w.id === id ? { ...w, zIndex: newZIndex } : w
       ));
     }
@@ -47,13 +37,13 @@ export const Desktop: React.FC = () => {
   };
 
   const handleMinimizeWindow = (id: string) => {
-    setWindows(windows.map(w => 
+    setWindows(windows.map(w =>
       w.id === id ? { ...w, isMinimized: true } : w
     ));
   };
 
   const handleMaximizeWindow = (id: string) => {
-    setWindows(windows.map(w => 
+    setWindows(windows.map(w =>
       w.id === id ? { ...w, isMaximized: !w.isMaximized } : w
     ));
   };
@@ -104,9 +94,9 @@ export const Desktop: React.FC = () => {
       {windows.filter(w => !w.isMinimized).map(window => {
         const app = applications.get(window.applicationId);
         if (!app) return null;
-        
+
         const AppComponent = app.component;
-        
+
         return (
           <Window
             key={window.id}
@@ -144,7 +134,7 @@ export const Desktop: React.FC = () => {
         onItemClick={(id) => {
           const window = windows.find(w => w.id === id);
           if (window?.isMinimized) {
-            setWindows(windows.map(w => 
+            setWindows(windows.map(w =>
               w.id === id ? { ...w, isMinimized: false } : w
             ));
           }
