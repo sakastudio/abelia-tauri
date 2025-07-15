@@ -11,8 +11,7 @@ const SupportCenter : React.FC = () => {
 
     return (
         <>
-        {/*<img src="assets/support-center/電話.png" style={{position: 'absolute', width: '100%', opacity: '0.5'}}></img> */ }
-        <img src="assets/support-center/電話.png" style={{position: 'absolute', width: '100%', opacity: '0.1'}}></img>
+        <img src="assets/support-center/サポートセンタシステムサンプル画像.png" style={{position: 'absolute', width: '100%', opacity: '0.1'}}></img>
 
             <Flex direction="row" style={{height: '100%', width: '100%',backgroundColor:'#dfdfe0'}}>
                 {/* 左側 顧客一覧 */}
