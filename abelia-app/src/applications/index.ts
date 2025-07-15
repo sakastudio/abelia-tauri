@@ -1,7 +1,7 @@
 import {Welcome} from "./Welcome/Welcome";
 import {Calculator} from "./Calculator/Calculator";
-import SupportCenter from "./support-center/SupportCenter";
 import type { Application } from '../types/Application';
+import SupportCenter from "./SupportCenter";
 
 const applicationsData: Record<string, Application> = {
   welcome: {
