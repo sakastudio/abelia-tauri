@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import type { ApplicationProps } from '../../types/Application';
-import type { Email } from './types';
 import { MailHeader } from './MailHeader.tsx';
 import { MailListView } from './MailListView.tsx';
 import { MailDetailView } from './MailDetailView.tsx';
-import { sampleEmails } from './data/sampleEmails';
 import {Flex} from "@mantine/core";
+import {type Email, MasterDataContext} from "../../contexts/MasterDataContext.ts";
 
 export const Mail: React.FC<ApplicationProps> = () => {
-  const [emails] = useState<Email[]>(sampleEmails);
+  const master = useContext(MasterDataContext);
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
 
   const handleSelectEmail = (email: Email) => {
@@ -19,6 +18,7 @@ export const Mail: React.FC<ApplicationProps> = () => {
     setSelectedEmail(null);
   };
 
+  const emails = master?.emails || [];
   const totalCount = emails.length;
   const unreadCount = emails.filter(email => !email.isRead).length;
 

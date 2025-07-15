@@ -1,7 +1,7 @@
 import React from 'react';
 import {ScrollArea, Table} from '@mantine/core';
-import type { Email } from './types.ts';
 import {MailTableRow} from "./MailTableRow.tsx";
+import type {Email} from "../../contexts/MasterDataContext.ts";
 
 interface MailListViewProps {
   emails: Email[];
