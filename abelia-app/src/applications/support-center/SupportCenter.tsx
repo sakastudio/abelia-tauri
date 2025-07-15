@@ -5,6 +5,7 @@ import './SupportCenter.css';
 import './SupportCenterCustomerList.css';
 import '../fonts.css';
 import {CommonButton} from "../components/CommonButton.tsx";
+import {SupportCenterCustomerListItem} from "./SupportCenterCustomerListItem.tsx";
 
 const SupportCenter : React.FC = () => {
 
@@ -45,20 +46,8 @@ const SupportCenter : React.FC = () => {
                                 </Table.Tr>
                             </Table.Thead>
                             <Table.Tbody>
-                                <Table.Tr>
-                                    <Table.Td>0001</Table.Td>
-                                    <Table.Td>一般</Table.Td>
-                                    <Table.Td>たなか</Table.Td>
-                                    <Table.Td>田中太郎</Table.Td>
-                                    <Table.Td>様</Table.Td>
-                                </Table.Tr>
-                                <Table.Tr>
-                                    <Table.Td>0002</Table.Td>
-                                    <Table.Td>法人</Table.Td>
-                                    <Table.Td>すずき</Table.Td>
-                                    <Table.Td>鈴木一郎</Table.Td>
-                                    <Table.Td>御中</Table.Td>
-                                </Table.Tr>
+                                <SupportCenterCustomerListItem name={"名前1"}></SupportCenterCustomerListItem>
+                                <SupportCenterCustomerListItem name={"名前2"}></SupportCenterCustomerListItem>
                             </Table.Tbody>
                         </Table>
             </ScrollArea>
