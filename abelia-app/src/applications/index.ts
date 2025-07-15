@@ -2,6 +2,7 @@ import {Welcome} from "./Welcome/Welcome";
 import {Calculator} from "./Calculator/Calculator";
 import type { Application } from '../types/Application';
 import SupportCenter from "./SupportCenter";
+import {Mail} from "./Mail";
 
 const applicationsData: Record<string, Application> = {
   welcome: {
@@ -36,6 +37,18 @@ const applicationsData: Record<string, Application> = {
     defaultSize: { width: 1200, height: 700 },
     defaultPosition: { x: 50, y: 30 },
     minSize: { width: 1000, height: 600 },
+    resizable: true,
+    maximizable: true,
+    minimizable: true,
+  },
+  mail: {
+    id: 'mail',
+    name: 'メール',
+    icon: '📧',
+    component: Mail,
+    defaultSize: { width: 900, height: 600 },
+    defaultPosition: { x: 150, y: 100 },
+    minSize: { width: 700, height: 500 },
     resizable: true,
     maximizable: true,
     minimizable: true,
