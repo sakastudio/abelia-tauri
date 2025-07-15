@@ -1,11 +1,14 @@
 import {MantineProvider} from '@mantine/core'
 import './App.css'
 import {Desktop} from './components/Desktop'
+import {MasterDataProvider} from "./contexts/MasterDataProvider.tsx";
 
 function App() {
     return (
         <MantineProvider>
-            <Desktop/>
+            <MasterDataProvider>
+                <Desktop/>
+            </MasterDataProvider>
         </MantineProvider>
     );
 }
