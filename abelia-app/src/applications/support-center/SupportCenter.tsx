@@ -3,8 +3,8 @@ import {Flex, Image, ScrollArea, Stack, Table, Text} from '@mantine/core';
 import '@mantine/core/styles.css';
 import './SupportCenterCustomerList.css';
 import '../fonts.css';
-import {CommonButton} from "../components/CommonButton.tsx";
 import {SupportCenterCustomerListItem} from "./SupportCenterCustomerListItem.tsx";
+import {CommonButton} from "../components/CommonButton";
 
 const SupportCenter : React.FC = () => {
 
