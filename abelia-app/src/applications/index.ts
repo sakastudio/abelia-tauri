@@ -1,6 +1,7 @@
 import {Welcome} from "./Welcome/Welcome";
 import {Calculator} from "./Calculator/Calculator";
 import type { Application } from '../types/Application';
+import SupportCenter from "./SupportCenter";
 
 const applicationsData: Record<string, Application> = {
   welcome: {
@@ -23,6 +24,18 @@ const applicationsData: Record<string, Application> = {
     defaultSize: { width: 320, height: 480 },
     defaultPosition: { x: 200, y: 100 },
     minSize: { width: 280, height: 400 },
+    resizable: true,
+    maximizable: true,
+    minimizable: true,
+  },
+  'support-center': {
+    id: 'support-center',
+    name: 'サポートセンター・システム',
+    icon: '📞',
+    component: SupportCenter,
+    defaultSize: { width: 1200, height: 700 },
+    defaultPosition: { x: 50, y: 30 },
+    minSize: { width: 1000, height: 600 },
     resizable: true,
     maximizable: true,
     minimizable: true,
