@@ -1,4 +1,5 @@
 import React from 'react';
+import { Group, Text } from '@mantine/core';
 
 interface MailHeaderProps {
   totalCount: number;
@@ -7,10 +8,10 @@ interface MailHeaderProps {
 
 export const MailHeader: React.FC<MailHeaderProps> = ({ totalCount, unreadCount }) => {
   return (
-    <div style={{ padding: '10px', borderBottom: '1px solid #ccc' }}>
-      <span>📧</span>
-      <span style={{ marginLeft: '10px' }}>[受信トレイ]</span>
-      <span style={{ marginLeft: '10px' }}>{totalCount}件（未読{unreadCount}件）</span>
-    </div>
+    <Group p="sm">
+      <Text>📧</Text>
+      <Text>[受信トレイ]</Text>
+      <Text c="dimmed">{totalCount}件（未読{unreadCount}件）</Text>
+    </Group>
   );
 };

@@ -8,6 +8,7 @@ interface MasterData {
 export interface Email {
     id: string;
     from: string;
+    fromAddress: string;
     subject: string;
     body: string;
     date: string;
