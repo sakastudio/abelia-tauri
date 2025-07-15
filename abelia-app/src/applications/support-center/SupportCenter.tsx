@@ -1,7 +1,6 @@
 import React from 'react';
 import {Flex, Image, ScrollArea, Stack, Table, Text} from '@mantine/core';
 import '@mantine/core/styles.css';
-import './SupportCenter.css';
 import './SupportCenterCustomerList.css';
 import '../fonts.css';
 import {CommonButton} from "../components/CommonButton.tsx";
@@ -11,8 +10,6 @@ const SupportCenter : React.FC = () => {
 
     return (
         <>
-        <img src="assets/support-center/サポートセンタシステムサンプル画像.png" style={{position: 'absolute', width: '100%', opacity: '0.1'}}></img>
-
             <Flex direction="row" style={{height: '100%', width: '100%',backgroundColor:'#dfdfe0'}}>
                 {/* 左側 顧客一覧 */}
                 <Flex flex={1}  direction="column">
