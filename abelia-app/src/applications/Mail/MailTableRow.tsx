@@ -1,6 +1,6 @@
 import React from 'react';
-import type { Email } from './types.ts';
 import {Table} from "@mantine/core";
+import type {Email} from "../../contexts/MasterDataContext.ts";
 
 interface MailTableRowProps {
   email: Email;

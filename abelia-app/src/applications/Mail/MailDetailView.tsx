@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollArea } from '@mantine/core';
 import { CommonButton } from '../components/CommonButton';
-import type { Email } from './types.ts';
+import type {Email} from "../../contexts/MasterDataContext.ts";
 
 interface MailDetailViewProps {
   email: Email;
